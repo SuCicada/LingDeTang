@@ -12,6 +12,7 @@
   </head>
   <body>
 <%--  sadfasds--%>
-    <% response.sendRedirect("html/user/login.html"); %>
+  <h1>yes, you are right</h1>
+<%--    <% response.sendRedirect("html/user/login.html"); %>--%>
   </body>
 </html>
