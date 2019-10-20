@@ -212,5 +212,4 @@ public class BaseDao<T>{
     public  Session getSession() {
         return hibernateTemplate.getSessionFactory().getCurrentSession();
     }
-	
 }

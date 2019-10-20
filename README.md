@@ -22,3 +22,7 @@
     - [jetty9 <welcome-file-list>不生效的解决方法](https://www.jianshu.com/p/358aae19969e)
     - [net.sf.ehcache.util.UpdateChecker.checkForUpdate问题解决方案](https://blog.csdn.net/wo541075754/article/details/79737289)
     - [java.lang.IllegalArgumentException: No converter found for return value of type](https://stackoverflow.com/questions/37841373/java-lang-illegalargumentexception-no-converter-found-for-return-value-of-type)
+    - [解决Intellij IDEA Tomcat启动项目报错：java.lang.ClassNotFoundException:org.springframework.web.context.ContextLoaderListener](https://www.jianshu.com/p/18d068f47b09)
+    
+## server configuration
+- apt install maven
