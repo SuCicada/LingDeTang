@@ -6,7 +6,6 @@ import org.subbs.dao.UserDao;
 import org.subbs.entity.User;
 import org.subbs.exception.UserExistException;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -30,9 +29,9 @@ public class UserService {
 
 	/**
 	 * 注册一个新用户,如果用户名已经存在此抛出UserExistException的异常
-	 * @param user 
+	 * @param user
 	 */
-	public void register(User user) throws UserExistException {
+	public void save(User user) throws UserExistException {
 		String username = user.getUsername();
 		User u = this.getUserByUserName(username);
 		if(u != null){
@@ -52,7 +51,6 @@ public class UserService {
         userDao.update(user);
     }
 	
-
 	   /**
      * 根据用户名/密码查询 User对象
      * @param userName 用户名
@@ -103,6 +101,17 @@ public class UserService {
 //		loginLog.setLoginDate(new Date());
         userDao.update(user);
 //        loginLogDao.save(loginLog);
-	}	
-	
+	}
+
+	public boolean isUserExist(User user) {
+		return getUserById(user.getUserId()) != null;
+	}
+
+	public void remove(User user){
+		userDao.remove(user);
+	}
+
+	public void removeAll() {
+		userDao.removeAll("User");
+	}
 }

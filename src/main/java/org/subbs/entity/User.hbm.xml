@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="org.subbs.entity.User" table="ldt_users" schema="lingdetang">
+        <id name="userId">
+            <column name="user_id" sql-type="int(11)"/>
+        </id>
+        <property name="username">
+            <column name="username" sql-type="varchar(20)" length="20"/>
+        </property>
+        <property name="userPassword">
+            <column name="user_password" sql-type="varchar(20)" length="20"/>
+        </property>
+        <property name="userNickname">
+            <column name="user_nickname" sql-type="varchar(20)" length="20" not-null="true"/>
+        </property>
+        <property name="userSex">
+            <column name="user_sex" sql-type="varchar(20)" length="20"/>
+        </property>
+        <property name="userEmail">
+            <column name="user_email" sql-type="varchar(20)" length="20" not-null="true"/>
+        </property>
+        <property name="userSignature">
+            <column name="user_signature" sql-type="varchar(200)" length="200" not-null="true"/>
+        </property>
+        <property name="userPhoto">
+            <column name="user_photo" sql-type="blob" not-null="true"/>
+        </property>
+        <property name="userPhone">
+            <column name="user_phone" sql-type="int(13)" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>

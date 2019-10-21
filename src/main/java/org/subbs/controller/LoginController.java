@@ -3,15 +3,17 @@ package org.subbs.controller;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 import org.subbs.cons.CommonConstant;
 import org.subbs.entity.User;
 import org.subbs.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -21,6 +23,10 @@ import java.util.Date;
  * To change this template use File | Settings | File Templates.
  * Description:
  */
+@CrossOrigin(origins = {
+        "http://sxuldt.gitee.io",
+        "http://localhost"},
+        maxAge = 3600)
 @Controller
 public class LoginController extends BaseController{
     private UserService userService;
@@ -37,21 +43,23 @@ public class LoginController extends BaseController{
      * @return
      */
     @ResponseBody
-    @RequestMapping("/doLogin")
-    public User login(HttpServletRequest request, User user) {
+    @RequestMapping(value="/doLogin",method = RequestMethod.POST)
+    public Map login(HttpServletRequest request, User user) {
+
         User dbUser = userService.getUserByUserName(user.getUsername());
-        ModelAndView mav = new ModelAndView();
+//        ModelAndView mav = new ModelAndView();
         System.out.println(dbUser);
+        Map res = new HashMap();
+        res.put("success",0);
 
         if (dbUser == null) {
-            mav.addObject("errorMsg", "用户名不存在");
+            res.put("msg","用户名不存在");
         } else if (!dbUser.getUserPassword().equals(user.getUserPassword())) {
-            mav.addObject("errorMsg", "用户密码不正确");
+            res.put("msg","用户密码不正确");
 //        } else if (dbUser.getLocked() == User.USER_LOCK) {
 //            mav.addObject("errorMsg", "用户已经被锁定，不能登录。");
         } else {
-//            System.out.println(dbUser);
-
+            res.put("success",1);
 //            dbUser.setLastIp(request.getRemoteAddr());
 //            dbUser.setLastVisit(new Date());
             userService.loginSuccess(dbUser);
@@ -62,9 +70,7 @@ public class LoginController extends BaseController{
             if(StringUtils.isEmpty(toUrl)){
                 toUrl = "/index.html";
             }
-//            mav.setViewName("redirect:"+toUrl);
-            return dbUser;
         }
-        return null;
+        return res;
     }
 }

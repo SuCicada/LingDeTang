@@ -81,7 +81,11 @@ public class BaseDao<T>{
 	 *
 	 */
 	public void removeAll(String tableName) {
-		getSession().createSQLQuery("truncate TABLE " + tableName +"").executeUpdate();
+//		getSession().createSQLQuery("truncate TABLE " + tableName +"").executeUpdate();
+		getHibernateTemplate().bulkUpdate("truncate TABLE " + tableName +"");
+	}
+
+	public void removeAll(){
 	}
 
 	/**

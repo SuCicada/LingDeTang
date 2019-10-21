@@ -1,37 +1,31 @@
 package org.subbs.entity;
 
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-
 import javax.persistence.*;
 import java.util.Arrays;
-import java.util.Objects;
 
 /**
  * Created with IntelliJ IDEA.
  * User: peng
- * Date: 10/19/19
- * Time: 1:11 PM
+ * Date: 10/21/19
+ * Time: 11:07 PM
  * To change this template use File | Settings | File Templates.
  * Description:
  */
 @Entity
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-@Table(name = "ldt_users", schema = "lingdetang")
+@Table(name = "ldt_users", schema = "lingdetang", catalog = "")
 public class User {
     private int userId;
     private String username;
     private String userPassword;
     private String userNickname;
-    private int userSex;
+    private String userSex;
     private String userEmail;
     private String userSignature;
     private byte[] userPhoto;
     private Integer userPhone;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
+    @Column(name = "user_id", nullable = false)
     public int getUserId() {
         return userId;
     }
@@ -41,7 +35,7 @@ public class User {
     }
 
     @Basic
-    @Column(name = "username")
+    @Column(name = "username", nullable = false, length = 20)
     public String getUsername() {
         return username;
     }
@@ -51,7 +45,7 @@ public class User {
     }
 
     @Basic
-    @Column(name = "user_password")
+    @Column(name = "user_password", nullable = false, length = 20)
     public String getUserPassword() {
         return userPassword;
     }
@@ -61,7 +55,7 @@ public class User {
     }
 
     @Basic
-    @Column(name = "user_nickname")
+    @Column(name = "user_nickname", nullable = true, length = 20)
     public String getUserNickname() {
         return userNickname;
     }
@@ -71,17 +65,17 @@ public class User {
     }
 
     @Basic
-    @Column(name = "user_sex")
-    public int getUserSex() {
+    @Column(name = "user_sex", nullable = false, length = 20)
+    public String getUserSex() {
         return userSex;
     }
 
-    public void setUserSex(int userSex) {
+    public void setUserSex(String userSex) {
         this.userSex = userSex;
     }
 
     @Basic
-    @Column(name = "user_email")
+    @Column(name = "user_email", nullable = true, length = 20)
     public String getUserEmail() {
         return userEmail;
     }
@@ -91,7 +85,7 @@ public class User {
     }
 
     @Basic
-    @Column(name = "user_signature")
+    @Column(name = "user_signature", nullable = true, length = 200)
     public String getUserSignature() {
         return userSignature;
     }
@@ -101,7 +95,7 @@ public class User {
     }
 
     @Basic
-    @Column(name = "user_photo")
+    @Column(name = "user_photo", nullable = true)
     public byte[] getUserPhoto() {
         return userPhoto;
     }
@@ -111,7 +105,7 @@ public class User {
     }
 
     @Basic
-    @Column(name = "user_phone")
+    @Column(name = "user_phone", nullable = true)
     public Integer getUserPhone() {
         return userPhone;
     }
@@ -122,28 +116,36 @@ public class User {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+
+        if (userId != user.userId) return false;
+        if (username != null ? !username.equals(user.username) : user.username != null) return false;
+        if (userPassword != null ? !userPassword.equals(user.userPassword) : user.userPassword != null) return false;
+        if (userNickname != null ? !userNickname.equals(user.userNickname) : user.userNickname != null) return false;
+        if (userSex != null ? !userSex.equals(user.userSex) : user.userSex != null) return false;
+        if (userEmail != null ? !userEmail.equals(user.userEmail) : user.userEmail != null) return false;
+        if (userSignature != null ? !userSignature.equals(user.userSignature) : user.userSignature != null)
             return false;
-        }
-        User that = (User) o;
-        return userId == that.userId &&
-                userSex == that.userSex &&
-                Objects.equals(username, that.username) &&
-                Objects.equals(userPassword, that.userPassword) &&
-                Objects.equals(userNickname, that.userNickname) &&
-                Objects.equals(userEmail, that.userEmail) &&
-                Objects.equals(userSignature, that.userSignature) &&
-                Arrays.equals(userPhoto, that.userPhoto) &&
-                Objects.equals(userPhone, that.userPhone);
+        if (!Arrays.equals(userPhoto, user.userPhoto)) return false;
+        if (userPhone != null ? !userPhone.equals(user.userPhone) : user.userPhone != null) return false;
+
+        return true;
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(userId, username, userPassword, userNickname, userSex, userEmail, userSignature, userPhone);
+        int result = userId;
+        result = 31 * result + (username != null ? username.hashCode() : 0);
+        result = 31 * result + (userPassword != null ? userPassword.hashCode() : 0);
+        result = 31 * result + (userNickname != null ? userNickname.hashCode() : 0);
+        result = 31 * result + (userSex != null ? userSex.hashCode() : 0);
+        result = 31 * result + (userEmail != null ? userEmail.hashCode() : 0);
+        result = 31 * result + (userSignature != null ? userSignature.hashCode() : 0);
         result = 31 * result + Arrays.hashCode(userPhoto);
+        result = 31 * result + (userPhone != null ? userPhone.hashCode() : 0);
         return result;
     }
 }
