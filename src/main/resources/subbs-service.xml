@@ -40,7 +40,7 @@
         </tx:attributes>
     </tx:advice>
     <!-- 基于EHCache的系统缓存管理器-->
-    <bean id="cacheManager"
-          class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean"
-          p:configLocation="classpath:ehcache.xml"/>
+<!--    <bean id="cacheManager"-->
+<!--          class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean"-->
+<!--          p:configLocation="classpath:ehcache.xml"/>-->
 </beans>
