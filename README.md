@@ -41,3 +41,10 @@
 - JWT 验证:
     - 后端生成token, 返回token, 验证token
     - 前端存储token, 发送token
+    - log: 
+        - use session directly -> i cannot, 前后端分离
+        - token 貌似不错
+        - jwt  很不错 -> 难以保证多端用户改密码, 登出
+        - cookie, session -> 还是不想用
+        - token 试试看
+        - jwt + 数据库存储
