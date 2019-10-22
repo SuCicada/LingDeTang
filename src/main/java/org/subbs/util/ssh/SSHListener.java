@@ -1,4 +1,4 @@
-package org.subbs.ssh;
+package org.subbs.util.ssh;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;

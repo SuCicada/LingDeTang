@@ -29,7 +29,7 @@
     <mvc:default-servlet-handler/>
 
     <mvc:cors>
-        <mvc:mapping path="/"
+        <mvc:mapping path="/**"
                      allowed-origins="http://sxuldt.gitee.io, http://localhost"
                      max-age="3600" />
 <!--                     allowed-methods="*"-->

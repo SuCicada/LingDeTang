@@ -37,20 +37,19 @@ public class RegisterController extends BaseController {
 	 */
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	@ResponseBody
-	public Map register(HttpServletRequest request, User user){
+	public Result register(HttpServletRequest request, User user){
 //		ModelAndView view = new ModelAndView();
 //		view.setViewName("/success");
 		System.out.println(user);
 		try {
 			userService.save(user);
 		} catch (UserExistException e) {
-//			view.addObject("errorMsg", "用户名已经存在，请选择其它的名字。");
+            return new Result(0,"用户名已经存在");
+		    //			view.addObject("errorMsg", "用户名已经存在，请选择其它的名字。");
 //			view.setViewName("forward:/register.jsp");
 		}
 		setSessionUser(request,user);
-		Map res = new HashMap();
-		res.put("success","1");
-		return res;
+		return new Result(1);
 		//		return view;
 	}
 	

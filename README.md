@@ -18,7 +18,13 @@
     - [web.xml中的url-pattern 写法小结](https://blog.csdn.net/farawaywl/article/details/52902902)
     - [@ResponseBody返回4种数据格式的数据](https://blog.csdn.net/weixin_42189604/article/details/82179660)
     - [SpringMVC+RestFul详细示例实战教程（实现跨域访问）](https://blog.51cto.com/sihai/2127929)
-
+    - [基于Token的WEB后台认证机制](https://www.cnblogs.com/xiekeli/p/5607107.html)
+    - [JWT生成token及过期处理方案](https://my.oschina.net/odetteisgorgeous/blog/1920762)
+    - [WEB后台--基于Token的WEB后台登录认证机制（并讲解其他认证机制以及cookie和session机制）](https://www.jianshu.com/p/227306fa28e4)
+    - [token机制完成登录状态保持/身份认证](https://www.jianshu.com/p/8d28e60af440)
+    - [Java MD5](https://www.jianshu.com/p/0086b0242cd6)
+    - [JWT的Java使用 (JJWT)](https://blog.csdn.net/qq_37636695/article/details/79265711)
+    
 - question
     - [jetty9 <welcome-file-list>不生效的解决方法](https://www.jianshu.com/p/358aae19969e)
     - [net.sf.ehcache.util.UpdateChecker.checkForUpdate问题解决方案](https://blog.csdn.net/wo541075754/article/details/79737289)
@@ -26,9 +32,12 @@
     - [解决Intellij IDEA Tomcat启动项目报错：java.lang.ClassNotFoundException:org.springframework.web.context.ContextLoaderListener](https://www.jianshu.com/p/18d068f47b09)
     - [springmvc添加CrossOrigin仍然无法跨域问题](https://blog.csdn.net/wfm19970/article/details/99494633)
     - [SpringMVC设置跨域mvc:cors报错The matching wildcard is strict, but no declaration can be found 解决](https://blog.csdn.net/ydk888888/article/details/83417259)
+    - [log4j:WARN No appenders could be found for logger 解决办法](https://blog.csdn.net/chw0629/article/details/80567936)
     
 ## server configuration
 
 # 特色
 - 使用CORS支持跨域访问
-- 
+- JWT 验证:
+    - 后端生成token, 返回token, 验证token
+    - 前端存储token, 发送token

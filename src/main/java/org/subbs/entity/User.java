@@ -12,13 +12,13 @@ import java.util.Arrays;
  * Description:
  */
 @Entity
-@Table(name = "ldt_users", schema = "lingdetang", catalog = "")
+@Table(name = "ldt_users", schema = "lingdetang")
 public class User {
     private int userId;
     private String username;
     private String userPassword;
     private String userNickname;
-    private String userSex;
+    private Integer userSex;
     private String userEmail;
     private String userSignature;
     private byte[] userPhoto;
@@ -65,12 +65,12 @@ public class User {
     }
 
     @Basic
-    @Column(name = "user_sex", nullable = false, length = 20)
-    public String getUserSex() {
+    @Column(name = "user_sex", nullable = false, length = 20, columnDefinition="int default 0")
+    public Integer getUserSex() {
         return userSex;
     }
 
-    public void setUserSex(String userSex) {
+    public void setUserSex(Integer userSex) {
         this.userSex = userSex;
     }
 

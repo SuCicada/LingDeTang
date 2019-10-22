@@ -85,9 +85,6 @@ public class BaseDao<T>{
 		getHibernateTemplate().bulkUpdate("truncate TABLE " + tableName +"");
 	}
 
-	public void removeAll(){
-	}
-
 	/**
 	 * 更改PO
 	 * 

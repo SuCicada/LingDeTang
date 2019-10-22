@@ -1,4 +1,4 @@
-package org.subbs.ssh;
+package org.subbs.util.ssh;
 
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.Session;

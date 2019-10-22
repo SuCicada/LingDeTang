@@ -37,7 +37,10 @@ public class UserService {
 		if(u != null){
 		    throw new UserExistException(username);
 		}else{
-//		    user.setCredit(100);
+			if(user.getUserSex() == null){
+				user.setUserSex(0);
+			}
+			//		    user.setCredit(100);
 //            user.setUserType(1);
             userDao.save(user);
 		}
