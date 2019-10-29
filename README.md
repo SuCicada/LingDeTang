@@ -35,6 +35,7 @@
     - [SpringMVC设置跨域mvc:cors报错The matching wildcard is strict, but no declaration can be found 解决](https://blog.csdn.net/ydk888888/article/details/83417259)
     - [log4j:WARN No appenders could be found for logger 解决办法](https://blog.csdn.net/chw0629/article/details/80567936)
     - [【SpringMVC】与权限拦截器冲突导致的Cors跨域设置失效问题](https://segmentfault.com/a/1190000010348077)
+    - [Java设置Access-Control-Allow-Origin允许多域名访问的实现方法](https://www.jb51.net/article/148573.htm)
     
 ## server configuration
 

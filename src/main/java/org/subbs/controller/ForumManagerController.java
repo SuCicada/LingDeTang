@@ -21,10 +21,10 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  * Description:
  */
-@CrossOrigin(origins = {
-        "http://sxuldt.gitee.io",
-        "http://localhost"},
-        maxAge = 3600)
+//@CrossOrigin(origins = {
+//        "http://sxuldt.gitee.io",
+//        "http://localhost"},
+//        maxAge = 3600)
 @RequestMapping(value="/forum")
 @RestController
 public class ForumManagerController extends BaseController {
