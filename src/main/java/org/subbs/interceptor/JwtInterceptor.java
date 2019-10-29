@@ -23,9 +23,6 @@ public class JwtInterceptor extends HandlerInterceptorAdapter {
 		System.out.println("经过了拦截器");
 		System.out.println(request.getRequestURL());
 
-		if(!(request.getMethod() )){
-			return true;
-		}
 		String url = request.getRequestURL().toString();
 		String tokenHeader = request.getHeader("sessionID");
 		Claims claims;
