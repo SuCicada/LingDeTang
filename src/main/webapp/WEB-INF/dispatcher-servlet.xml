@@ -17,6 +17,8 @@
     <!-- 自动扫描  包下的@Controller标注的类控制器类 -->
     <context:component-scan base-package="org.subbs.controller"/>
 
+    <context:component-scan base-package="org.subbs.util" />
+
     <!-- 自动扫描  包下的@Controller标注的类控制器类 -->
     <mvc:annotation-driven/>
 <!--    <mvc:annotation-driven >-->
@@ -30,12 +32,23 @@
 
     <mvc:cors>
         <mvc:mapping path="/**"
-                     allowed-origins="http://sxuldt.gitee.io, http://localhost"
-                     max-age="3600" />
-<!--                     allowed-methods="*"-->
+             allowed-origins="http://localhost, http://sxuldt.gitee.io"
+             allowed-methods="*"
+             max-age="3600" />
 <!--                     allowed-headers="header1, header2, header3"-->
 <!--                     exposed-headers="header1, header2" allow-credentials="false"-->
     </mvc:cors>
+
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <mvc:mapping path="/checkLogin"/>
+            <mvc:exclude-mapping path="/doLogin"/>
+            <mvc:exclude-mapping path="/register"/>
+            <bean class="org.subbs.interceptor.JwtInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
 
     <bean id="viewResolver"
           class="org.springframework.web.servlet.view.InternalResourceViewResolver">

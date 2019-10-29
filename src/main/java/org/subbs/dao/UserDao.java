@@ -10,9 +10,11 @@ import java.util.List;
  */
 @Repository
 public class UserDao extends BaseDao<User> {
-	private static final String GET_USER_BY_USERNAME = "from User u where u.username = ?";
+	private static final String GET_USER_BY_USERNAME =
+			"from User u where u.username = ?";
 	
-	private static final String QUERY_USER_BY_USERNAME = "from User u where u.username like ?";
+	private static final String QUERY_USER_BY_USERNAME =
+			"from User u where u.username like ?";
 	
     /**
      * 根据用户名查询User对象

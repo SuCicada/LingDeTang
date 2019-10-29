@@ -6,7 +6,9 @@ import org.subbs.dao.UserDao;
 import org.subbs.entity.User;
 import org.subbs.exception.UserExistException;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 用户管理服务类，负责查询用户、注册用户、锁定用户等操作
@@ -117,4 +119,5 @@ public class UserService {
 	public void removeAll() {
 		userDao.removeAll("User");
 	}
+
 }

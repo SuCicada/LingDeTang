@@ -10,7 +10,10 @@ import org.subbs.entity.User;
 import org.subbs.exception.UserExistException;
 import org.subbs.service.UserService;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,10 +40,10 @@ public class RegisterController extends BaseController {
 	 */
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	@ResponseBody
-	public Result register(HttpServletRequest request, User user){
+	public Result register(HttpServletRequest request, HttpServletResponse response, User user) throws ServletException, IOException {
 //		ModelAndView view = new ModelAndView();
 //		view.setViewName("/success");
-		System.out.println(user);
+//		System.out.println(user);
 		try {
 			userService.save(user);
 		} catch (UserExistException e) {
@@ -49,6 +52,7 @@ public class RegisterController extends BaseController {
 //			view.setViewName("forward:/register.jsp");
 		}
 		setSessionUser(request,user);
+		request.getRequestDispatcher("/doLogin").forward(request, response);
 		return new Result(1);
 		//		return view;
 	}

@@ -24,6 +24,7 @@
     - [token机制完成登录状态保持/身份认证](https://www.jianshu.com/p/8d28e60af440)
     - [Java MD5](https://www.jianshu.com/p/0086b0242cd6)
     - [JWT的Java使用 (JJWT)](https://blog.csdn.net/qq_37636695/article/details/79265711)
+    - [基于Java的JJWT实现JWT认证](https://blog.csdn.net/u010953880/article/details/86735797)
     
 - question
     - [jetty9 <welcome-file-list>不生效的解决方法](https://www.jianshu.com/p/358aae19969e)
@@ -33,6 +34,7 @@
     - [springmvc添加CrossOrigin仍然无法跨域问题](https://blog.csdn.net/wfm19970/article/details/99494633)
     - [SpringMVC设置跨域mvc:cors报错The matching wildcard is strict, but no declaration can be found 解决](https://blog.csdn.net/ydk888888/article/details/83417259)
     - [log4j:WARN No appenders could be found for logger 解决办法](https://blog.csdn.net/chw0629/article/details/80567936)
+    - [【SpringMVC】与权限拦截器冲突导致的Cors跨域设置失效问题](https://segmentfault.com/a/1190000010348077)
     
 ## server configuration
 
@@ -41,6 +43,16 @@
 - JWT 验证:
     - 后端生成token, 返回token, 验证token
     - 前端存储token, 发送token
+
+# log
+- 10.23
+    - 尝试使用拦截器
+    - 发现前端请求登录有两次请求,第一次是option
+    - 决定前端使用cookie 存储token
+    - 前端增加subbs js集成功能
+
+- 10.22
+    - 处理登录功能
     - log: 
         - use session directly -> i cannot, 前后端分离
         - token 貌似不错

@@ -1,5 +1,6 @@
 package org.subbs.dao;
 
+import org.springframework.stereotype.Repository;
 import org.subbs.entity.Topic;
 
 /**
@@ -10,6 +11,7 @@ import org.subbs.entity.Topic;
  * To change this template use File | Settings | File Templates.
  * Description:
  */
+@Repository
 public class TopicDao extends BaseDao<Topic>{
 
     private static final String GET_PAGED_TOPICS =

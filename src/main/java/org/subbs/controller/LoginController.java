@@ -10,6 +10,7 @@ import org.subbs.entity.User;
 import org.subbs.service.UserService;
 import org.subbs.util.AuthUtil;
 import org.subbs.util.JavaWebTokenManager;
+import org.subbs.util.O2M;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -29,12 +30,8 @@ import java.util.Map;
         maxAge = 3600)
 @Controller
 public class LoginController extends BaseController{
-    private UserService userService;
-
     @Autowired
-    public void setUserService(UserService userService) {
-        this.userService = userService;
-    }
+    private UserService userService;
 
     /**
      * 用户登陆
@@ -48,7 +45,7 @@ public class LoginController extends BaseController{
 
         User dbUser = userService.getUserByUserName(user.getUsername());
 //        ModelAndView mav = new ModelAndView();
-        System.out.println(dbUser);
+//        System.out.println(dbUser);
         Result res = new Result();
         res.setSuccess(0);
 
@@ -70,7 +67,11 @@ public class LoginController extends BaseController{
             System.out.println("sessionID: "+sessionId);
 
             Map data = new HashMap();
+            Map userInfo = new HashMap();
             data.put("sessionID",sessionId);
+            String info[] = new String[]{"userId","username","userPhoto"};
+            data.put("userInfo", O2M.parse(user,info));
+
             res.setData(data);
             userService.loginSuccess(dbUser);
 //            setSessionUser(request,dbUser);
@@ -85,14 +86,7 @@ public class LoginController extends BaseController{
     }
 
     @ResponseBody
-    @RequestMapping(value="/checkLogin",method=RequestMethod.GET)
-    public Long checkLogin(HttpServletRequest request){
-        Long userId = null;
-        try {
-            userId = AuthUtil.getUserId(request);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return userId;
+    @RequestMapping(value="/checkLogin",method=RequestMethod.OPTIONS)
+    public void checkLogin(HttpServletRequest request){
     }
 }

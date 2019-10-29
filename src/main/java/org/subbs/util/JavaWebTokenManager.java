@@ -5,6 +5,7 @@ import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
@@ -21,6 +22,7 @@ import java.util.Map;
  * To change this template use File | Settings | File Templates.
  * Description:
  */
+@Component
 public class JavaWebTokenManager {
 
     private static Logger log = Logger.getLogger(JavaWebTokenManager.class);

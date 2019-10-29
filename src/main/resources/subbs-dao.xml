@@ -49,6 +49,8 @@
 <!--                    org.hibernate.cache.ehcache.EhCacheRegionFactory-->
 <!--                </prop>-->
                 <prop key="hibernate.cache.use_query_cache">false</prop>
+                <prop key="hibernate.connection.url">jdbc:mysql://localhost:3306/lingdetang</prop>
+                <prop key="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</prop>
             </props>
         </property>
         <property name="mappingLocations">
