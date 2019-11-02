@@ -67,7 +67,7 @@ public class LoginController extends BaseController{
             System.out.println("sessionID: "+sessionId);
 
             Map data = new HashMap();
-            Map userInfo = new HashMap();
+//            Map userInfo = new HashMap();
             data.put("sessionID",sessionId);
             String info[] = new String[]{"userId","username","userPhoto"};
             data.put("userInfo", O2M.parse(user,info));

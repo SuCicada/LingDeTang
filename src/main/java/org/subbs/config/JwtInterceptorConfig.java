@@ -17,8 +17,8 @@ import org.subbs.interceptor.JwtInterceptor;
  * To change this template use File | Settings | File Templates.
  * Description:
  */
-@Configuration
-@EnableWebMvc
+//@Configuration
+//@EnableWebMvc
 @ComponentScan(basePackages = "org.subbs.interceptor")
 public class JwtInterceptorConfig extends WebMvcConfigurationSupport {
 

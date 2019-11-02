@@ -24,7 +24,11 @@
           p:driverClassName="${jdbc.driverClassName}"
           p:url="${jdbc.url}"
           p:username="${jdbc.username}"
-          p:password="${jdbc.password}" />
+          p:password="${jdbc.password}"
+
+          p:validationQuery="select 1"
+          p:testWhileIdle="true"
+          p:testOnBorrow="true"/>
 
     <bean id="sessionFactory"
           class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
@@ -49,8 +53,6 @@
 <!--                    org.hibernate.cache.ehcache.EhCacheRegionFactory-->
 <!--                </prop>-->
                 <prop key="hibernate.cache.use_query_cache">false</prop>
-                <prop key="hibernate.connection.url">jdbc:mysql://localhost:3306/lingdetang</prop>
-                <prop key="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</prop>
             </props>
         </property>
         <property name="mappingLocations">

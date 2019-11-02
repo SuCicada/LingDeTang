@@ -9,6 +9,5 @@
         <module name="LingDeTang" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="8" />
   </component>
 </project>

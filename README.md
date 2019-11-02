@@ -36,6 +36,7 @@
     - [log4j:WARN No appenders could be found for logger 解决办法](https://blog.csdn.net/chw0629/article/details/80567936)
     - [【SpringMVC】与权限拦截器冲突导致的Cors跨域设置失效问题](https://segmentfault.com/a/1190000010348077)
     - [Java设置Access-Control-Allow-Origin允许多域名访问的实现方法](https://www.jb51.net/article/148573.htm)
+    - [springMVC中多个自定义拦截器方法的执行顺序](https://blog.csdn.net/weixin_39214481/article/details/80030609)
     
 ## server configuration
 
@@ -46,6 +47,10 @@
     - 前端存储token, 发送token
 
 # log
+- 10.31
+    - 解决跨域和token检测冲突问题，创建一个拦截器，首先为请求添加请求头部
+    - token检测错误，未解决
+
 - 10.23
     - 尝试使用拦截器
     - 发现前端请求登录有两次请求,第一次是option

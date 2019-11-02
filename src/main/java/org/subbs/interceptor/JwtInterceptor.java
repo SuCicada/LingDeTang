@@ -3,6 +3,7 @@ package org.subbs.interceptor;
 import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
 import org.springframework.web.HttpRequestHandler;
 import org.springframework.web.method.HandlerMethod;
@@ -21,19 +22,22 @@ public class JwtInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)  {
 		System.out.println("经过了拦截器");
-		System.out.println(request.getRequestURL());
+//		System.out.println(request.getRequestURL());
 
-		String url = request.getRequestURL().toString();
-		String tokenHeader = request.getHeader("sessionID");
-		Claims claims;
-		try {
-			System.out.println(tokenHeader);
-			claims = JavaWebTokenManager.verifyJavaWebToken(tokenHeader);
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			return false;
+		if (request.getHeader(HttpHeaders.ORIGIN) != null) {
+			String url = request.getRequestURL().toString();
+			String tokenHeader = request.getHeader("sessionID");
+			Claims claims;
+			try {
+				System.out.println(tokenHeader);
+				claims = JavaWebTokenManager.verifyJavaWebToken(tokenHeader);
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+				return false;
+			}
+//			System.out.println(claims.getSubject());
 		}
-		System.out.println(claims.getSubject());
+		System.out.println("过");
 		return true;
 	}
 }

@@ -3,6 +3,7 @@ package org.subbs.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -11,7 +12,11 @@ import org.subbs.entity.Forum;
 import org.subbs.entity.User;
 import org.subbs.service.ForumService;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -25,7 +30,8 @@ import java.util.List;
 //        "http://sxuldt.gitee.io",
 //        "http://localhost"},
 //        maxAge = 3600)
-@RequestMapping(value="/forum")
+//@Controller
+@RequestMapping("/forum")
 @RestController
 public class ForumManagerController extends BaseController {
 
@@ -36,13 +42,20 @@ public class ForumManagerController extends BaseController {
      * 查找所有
      * @return
      */
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = {"","/"}, method = RequestMethod.GET)
     public ResponseEntity<List<User>> listAllForums() {
         List<Forum> forums = forumService.getAllForums();
+        System.out.println(forums);
+        Result result = new Result();
         if (forums.isEmpty()) {
+            result.setSuccess(0);
             return new ResponseEntity(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity(forums, HttpStatus.OK);
+        result.setSuccess(1);
+        Map data = new HashMap();
+        data.put("forums",forums);
+        result.setData(data);
+        return new ResponseEntity(result, HttpStatus.OK);
     }
 
     

@@ -29,7 +29,7 @@ public class JavaWebTokenManager {
 
     private static String keySecret = "SuCicada";
 
-    private static final long EXPIREDURATION = 1000L;
+    private static final long EXPIREDURATION = 24*60*60*1000L;
 
     private static SecretKey getKeyInstance() {
 //        return MacProvider.generateKey();
@@ -67,9 +67,11 @@ public class JavaWebTokenManager {
             Claims jwtClaims = Jwts.parser()
                             .setSigningKey(getKeyInstance())
                             .parseClaimsJws(jwt).getBody();
+            System.out.println(jwtClaims);
             return jwtClaims;
         } catch (Exception e) {
-            log.error("json web token verify failed");
+//            e.printStackTrace();
+            System.out.println(e.getMessage());
             throw new Exception("json web token verify failed");
         }
     }
