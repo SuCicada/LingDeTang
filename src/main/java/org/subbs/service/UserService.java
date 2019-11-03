@@ -2,9 +2,12 @@ package org.subbs.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.subbs.controller.Result;
 import org.subbs.dao.UserDao;
 import org.subbs.entity.User;
 import org.subbs.exception.UserExistException;
+import org.subbs.util.JavaWebTokenManager;
+import org.subbs.util.O2M;
 
 import java.util.HashMap;
 import java.util.List;
@@ -93,7 +96,49 @@ public class UserService {
 	public List<User> getAllUsers(){
 		return userDao.loadAll();
 	}
-	
+
+	public Result doLogin(User user){
+		User dbUser = getUserByUserName(user.getUsername());
+//        ModelAndView mav = new ModelAndView();
+//        System.out.println(dbUser);
+		Result res = new Result();
+		res.setSuccess(0);
+
+		if (dbUser == null) {
+			res.setMsg("用户名不存在");
+		} else if (!dbUser.getUserPassword().equals(user.getUserPassword())) {
+			res.setMsg("用户密码不正确");
+//        } else if (dbUser.getLocked() == User.USER_LOCK) {
+//            mav.addObject("errorMsg", "用户已经被锁定，不能登录。");
+		} else {
+			res.setSuccess(1);
+
+//            dbUser.setLastIp(request.getRemoteAddr());
+//            dbUser.setLastVisit(new Date());
+			Map<String,Object> loginInfo = new HashMap();
+			loginInfo.put("userId",dbUser.getUserId());
+			String sessionId = JavaWebTokenManager.createJavaWebToken(loginInfo);
+
+			System.out.println("sessionID: "+sessionId);
+
+			Map data = new HashMap();
+//            Map userInfo = new HashMap();
+			data.put("sessionID",sessionId);
+			String info[] = new String[]{"userId","username","userPhoto"};
+			data.put("userInfo", O2M.parse(user,info));
+
+			res.setData(data);
+			loginSuccess(dbUser);
+//            setSessionUser(request,dbUser);
+//            String toUrl = (String)request.getSession().getAttribute(CommonConstant.LOGIN_TO_URL);
+//            request.getSession().removeAttribute(CommonConstant.LOGIN_TO_URL);
+			//如果当前会话中没有保存登录之前的请求URL，则直接跳转到主页
+//            if(StringUtils.isEmpty(toUrl)){
+//                toUrl = "/index.html";
+//            }
+		}
+		return res;
+	}
 	/**
 	 * 登陆成功
 	 * @param user

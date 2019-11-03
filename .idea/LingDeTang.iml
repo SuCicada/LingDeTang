@@ -1,2 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module type="JAVA_MODULE" version="4" />
+<module type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="hibernate" name="Hibernate">
+      <configuration>
+        <datasource-map>
+          <unit-entry name="sessionFactory" value="5aab46da-9d57-479d-ac72-5fbc6aa4dc66" />
+        </datasource-map>
+        <naming-strategy-map />
+      </configuration>
+    </facet>
+  </component>
+</module>

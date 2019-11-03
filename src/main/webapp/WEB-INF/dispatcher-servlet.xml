@@ -39,19 +39,19 @@
 <!--                     exposed-headers="header1, header2" allow-credentials="false"-->
     </mvc:cors>
 
-<!--    <mvc:interceptors>-->
-<!--        <mvc:interceptor>-->
-<!--            <mvc:mapping path="/**"/>-->
-<!--            <bean class="org.subbs.interceptor.CorsInterceptor"/>-->
-<!--        </mvc:interceptor>-->
-<!--        <mvc:interceptor>-->
-<!--            <mvc:mapping path="/**"/>-->
-<!--            <mvc:mapping path="/checkLogin"/>-->
-<!--            <mvc:exclude-mapping path="/doLogin"/>-->
-<!--            <mvc:exclude-mapping path="/register"/>-->
-<!--            <bean class="org.subbs.interceptor.JwtInterceptor"/>-->
-<!--        </mvc:interceptor>-->
-<!--    </mvc:interceptors>-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="org.subbs.interceptor.CorsInterceptor"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <mvc:mapping path="/checkLogin"/>
+            <mvc:exclude-mapping path="/doLogin"/>
+            <mvc:exclude-mapping path="/register"/>
+            <bean class="org.subbs.interceptor.JwtInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
 
 
     <bean id="viewResolver"

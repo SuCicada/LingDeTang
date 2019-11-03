@@ -2,19 +2,24 @@
 
 项目使用 maven 配置, web容器采用 jetty, orm框架采用 hibernate
 
-- 实体类的属性名要和ajax传入数据名一致, 才能自动构建实体对象
+## 待实现
+- [ ] hibernate 换用 c3p0 连接池
+- [ ] hibernate 使用二级缓存
+- [ ] 用户加入最后登录时间，最后登录ip
+- [ ] 数据库增加用户登录日志表
 
-- hibernate
-    - 二级缓存
-    - 投影查询
-    - hql
-
+## 关键点记录
 - intellij 
     - [创建 java web项目](https://www.cnblogs.com/yangyquin/p/5285272.html)
     - [创建 spring mvc web 项目](https://www.cnblogs.com/yangyquin/p/5286457.html)
     - [为了自动下载包 配置 maven](https://blog.csdn.net/qq_32588349/article/details/51461182)
 
 - knowledge
+    - 实体类的属性名要和ajax传入数据名一致, 才能自动构建实体对象
+    - hibernate
+        - 二级缓存
+        - 投影查询
+        - hql
     - [web.xml中的url-pattern 写法小结](https://blog.csdn.net/farawaywl/article/details/52902902)
     - [@ResponseBody返回4种数据格式的数据](https://blog.csdn.net/weixin_42189604/article/details/82179660)
     - [SpringMVC+RestFul详细示例实战教程（实现跨域访问）](https://blog.51cto.com/sihai/2127929)
@@ -37,6 +42,7 @@
     - [【SpringMVC】与权限拦截器冲突导致的Cors跨域设置失效问题](https://segmentfault.com/a/1190000010348077)
     - [Java设置Access-Control-Allow-Origin允许多域名访问的实现方法](https://www.jb51.net/article/148573.htm)
     - [springMVC中多个自定义拦截器方法的执行顺序](https://blog.csdn.net/weixin_39214481/article/details/80030609)
+    - [springMVC拦截器返回错误信息给前端](https://blog.csdn.net/qq_37585236/article/details/81781563)
     
 ## server configuration
 
@@ -47,6 +53,9 @@
     - 前端存储token, 发送token
 
 # log
+- 11.3
+    - 实现板块查询
+    - `20:53` 发帖功能实验成功 
 - 10.31
     - 解决跨域和token检测冲突问题，创建一个拦截器，首先为请求添加请求头部
     - token检测错误，未解决
