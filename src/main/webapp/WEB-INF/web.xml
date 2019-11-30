@@ -14,6 +14,10 @@
         <param-name>org.eclipse.jetty.servlet.Default.welcomeServlets</param-name>
         <param-value>true</param-value>
     </context-param>
+    <context-param>
+        <param-name>log4jConfigLocation</param-name>
+        <param-value>classpath:/log4j.properties</param-value>
+    </context-param>
 
 <!--    <context-param>-->
 <!--        <param-name>contextClass</param-name>-->
@@ -25,9 +29,10 @@
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
-    <listener>
-        <listener-class>org.subbs.util.ssh.SSHListener</listener-class>
-    </listener>
+<!--    这里是设置ssh代理用于mysql连接-->
+    <!--    <listener>-->
+<!--        <listener-class>org.subbs.util.ssh.SSHListener</listener-class>-->
+<!--    </listener>-->
     <filter>
         <filter-name>hibernateFilter</filter-name>
         <filter-class>org.springframework.orm.hibernate4.support.OpenSessionInViewFilter</filter-class>

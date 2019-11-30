@@ -1,7 +1,7 @@
 # 令德堂 - 山西大学论坛
 
 项目使用 maven 配置, web容器采用 jetty, orm框架采用 hibernate
-
+ 
 ## 待实现
 - [ ] hibernate 换用 c3p0 连接池
 - [ ] hibernate 使用二级缓存

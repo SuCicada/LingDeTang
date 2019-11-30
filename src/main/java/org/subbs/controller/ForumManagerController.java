@@ -57,6 +57,4 @@ public class ForumManagerController extends BaseController {
         result.setData(data);
         return new ResponseEntity(result, HttpStatus.OK);
     }
-
-    
 }

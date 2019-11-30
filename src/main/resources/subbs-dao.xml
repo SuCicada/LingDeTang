@@ -46,7 +46,7 @@
                 <prop key="hibernate.show_sql">false</prop>
                 <prop key="hibernate.format_sql">true</prop>
                 <prop key="hibernate.use_sql_comments">true</prop>
-                <prop key="hibernate.hbm2ddl.auto">create</prop>
+<!--                <prop key="hibernate.hbm2ddl.auto"></prop>-->
 <!--                采用EHCache缓存方案-->
                 <prop key="hibernate.cache.use_second_level_cache">false</prop>
 <!--                <prop key="hibernate.cache.region.factory_class">-->

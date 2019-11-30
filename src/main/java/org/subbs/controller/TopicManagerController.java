@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.net.URI;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -42,11 +43,17 @@ public class TopicManagerController extends BaseController {
         topic.setTopicUpdateDate(now);
         topicService.save(topic);
 
-        HttpHeaders headers = new HttpHeaders();
-        URI uri = ucBuilder.path("/topic/{id}").buildAndExpand(topic.getTopicId()).toUri();
-        headers.setLocation(uri);
-
-        return new ResponseEntity(headers, HttpStatus.CREATED);
+        /* 需要302重定向到新发布的页面使用这个*/
+//        HttpHeaders headers = new HttpHeaders();
+//        URI uri = ucBuilder.path("/topic/{id}").buildAndExpand(topic.getTopicId()).toUri();
+//        headers.setLocation(uri);
+//        return new ResponseEntity(headers, HttpStatus.FOUND);
+        Result result = new Result();
+        result.setSuccess(1);
+        Map data = new HashMap();
+        data.put("topicId",topic.getTopicId());
+        result.setData(data);
+        return new ResponseEntity(result, HttpStatus.OK);
 
     }
 }
