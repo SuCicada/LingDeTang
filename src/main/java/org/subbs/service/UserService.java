@@ -2,6 +2,7 @@ package org.subbs.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.subbs.controller.Result;
 import org.subbs.dao.UserDao;
 import org.subbs.entity.User;
@@ -9,6 +10,8 @@ import org.subbs.exception.UserExistException;
 import org.subbs.util.JavaWebTokenManager;
 import org.subbs.util.O2M;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -97,7 +100,7 @@ public class UserService {
 		return userDao.loadAll();
 	}
 
-	public Result doLogin(User user){
+	public Result doLogin(User user, HttpServletRequest request, HttpSession session, Model model){
 		User dbUser = getUserByUserName(user.getUsername());
 //        ModelAndView mav = new ModelAndView();
 //        System.out.println(dbUser);
@@ -125,11 +128,15 @@ public class UserService {
 //            Map userInfo = new HashMap();
 			data.put("sessionID",sessionId);
 			String info[] = new String[]{"userId","username","userPhoto"};
-			data.put("userInfo", O2M.parse(user,info));
+			Map userInfo = O2M.parse(dbUser,info);
+			data.put("userInfo", userInfo );
 
 			res.setData(data);
 			loginSuccess(dbUser);
-//            setSessionUser(request,dbUser);
+//			request.getSession().setAttribute("user",userInfo);
+//			session.setAttribute("user",userInfo);
+			model.addAttribute("user",userInfo);
+			//            setSessionUser(request,dbUser);
 //            String toUrl = (String)request.getSession().getAttribute(CommonConstant.LOGIN_TO_URL);
 //            request.getSession().removeAttribute(CommonConstant.LOGIN_TO_URL);
 			//如果当前会话中没有保存登录之前的请求URL，则直接跳转到主页
@@ -149,6 +156,7 @@ public class UserService {
 //		loginLog.setUser(user);
 //		loginLog.setIp(user.getLastIp());
 //		loginLog.setLoginDate(new Date());
+
         userDao.update(user);
 //        loginLogDao.save(loginLog);
 	}
@@ -165,4 +173,8 @@ public class UserService {
 		userDao.removeAll("User");
 	}
 
+    public Result doLogout(User user, HttpServletRequest request) {
+		request.removeAttribute("user");
+		return new Result(1);
+    }
 }

@@ -49,7 +49,7 @@
             <mvc:mapping path="/checkLogin"/>
             <mvc:exclude-mapping path="/doLogin"/>
             <mvc:exclude-mapping path="/register"/>
-            <bean class="org.subbs.interceptor.JwtInterceptor"/>
+            <bean class="org.subbs.interceptor.CheckUserInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
 

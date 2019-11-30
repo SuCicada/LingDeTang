@@ -2,10 +2,8 @@ package org.subbs.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.subbs.entity.User;
 import org.subbs.service.UserService;
 import org.subbs.util.AuthUtil;
@@ -13,6 +11,7 @@ import org.subbs.util.JavaWebTokenManager;
 import org.subbs.util.O2M;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,6 +28,7 @@ import java.util.Map;
         "http://localhost"},
         maxAge = 3600)
 @Controller
+@SessionAttributes("user")
 public class LoginController extends BaseController{
     @Autowired
     private UserService userService;
@@ -40,13 +40,27 @@ public class LoginController extends BaseController{
      */
     @ResponseBody
     @RequestMapping(value="/doLogin",method = RequestMethod.POST)
-    public Result login(User user) {
-        return userService.doLogin(user);
+    public Result login(User user, HttpServletRequest request, HttpSession session, Model model) {
+        return userService.doLogin(user,request,session,model);
+    }
+
+    /**
+     * 用户登出
+     * @param user
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value="/doLogout",method = RequestMethod.POST)
+    public Result logout(User user,HttpServletRequest request) {
+        return userService.doLogout(user,request);
     }
 
     @ResponseBody
     @RequestMapping(value="/checkLogin", method = RequestMethod.GET)
-    public void checkLogin(HttpServletRequest request){
+    public Result checkLogin(HttpServletRequest request,HttpSession session,Model model){
         System.out.println("验证正确");
+        return new Result(1);
     }
+
+
 }

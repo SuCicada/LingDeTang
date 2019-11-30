@@ -24,7 +24,10 @@ public class CorsInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        String[] allowDomains = {"http://localhost", "http://sxuldt.gitee.io", "http://lan.pc"};
+        String[] allowDomains = {
+                "http://localhost",
+                "http://sxuldt.gitee.io",
+                "http://lan.pc"};
         Set allowOrigins = new HashSet(Arrays.asList(allowDomains));
         String originHeads = request.getHeader("Origin");
         System.out.println(request.getRequestURL());

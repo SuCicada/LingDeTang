@@ -7,6 +7,8 @@ import org.subbs.dao.Page;
 import org.subbs.dao.TopicDao;
 import org.subbs.entity.Topic;
 
+import java.util.List;
+
 /**
  * Created with IntelliJ IDEA.
  * User: peng
@@ -23,12 +25,17 @@ public class TopicService {
     public void save(Topic topic){
         topicDao.save(topic);
     }
+
     /**
      * 获取论坛版块某一页主题帖，以最后回复时间降序排列
-     * @param boardId
      * @return
      */
 //    public Page getPagedTopics(int boardId, int pageNo, int pageSize){
 //        return topicDao.getPagedTopics(boardId,pageNo,pageSize);
 //    }
+
+    public List<Topic> getAllTopic(){
+        return topicDao.loadAll();
+    }
+
 }

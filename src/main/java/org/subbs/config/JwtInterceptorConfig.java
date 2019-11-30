@@ -2,12 +2,9 @@ package org.subbs.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import org.subbs.interceptor.JwtInterceptor;
+import org.subbs.interceptor.CheckUserInterceptor;
 
 /**
  * Created with IntelliJ IDEA.
@@ -23,7 +20,7 @@ import org.subbs.interceptor.JwtInterceptor;
 public class JwtInterceptorConfig extends WebMvcConfigurationSupport {
 
     @Autowired
-    private JwtInterceptor jwtInterceptor;
+    private CheckUserInterceptor jwtInterceptor;
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {

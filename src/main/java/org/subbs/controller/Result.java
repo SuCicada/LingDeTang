@@ -41,6 +41,10 @@ public class Result {
         this.success = success;
     }
 
+    public void setSuccess(boolean success) {
+        setSuccess(success?1:0);
+    }
+
     public String getMsg() {
         return msg;
     }

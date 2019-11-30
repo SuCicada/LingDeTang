@@ -3,12 +3,16 @@ package org.subbs.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
+import org.subbs.entity.Forum;
 import org.subbs.entity.Topic;
+import org.subbs.entity.User;
 import org.subbs.service.TopicService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +20,7 @@ import java.net.URI;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -56,4 +61,39 @@ public class TopicManagerController extends BaseController {
         return new ResponseEntity(result, HttpStatus.OK);
 
     }
+
+
+    /**
+     * 查找所有
+     * @return
+     */
+    @RequestMapping(value = {"","/"}, method = RequestMethod.GET)
+    public ResponseEntity listAllForums() {
+        List<Topic> topics = topicService.getAllTopic();
+        System.out.println(topics);
+        Result result = new Result();
+        result.setSuccess(1);
+        Map data = new HashMap();
+        data.put("topics",topics);
+        result.setData(data);
+        return new ResponseEntity(result, HttpStatus.OK);
+    }
+
+//    /**
+//     * 查找一个
+//     * @param id
+//     * @return
+//     */
+//    @RequestMapping(value = "/{id}", method = RequestMethod.GET,
+//            produces = MediaType.APPLICATION_JSON_VALUE)
+//    public ResponseEntity<User> getTopic(@PathVariable("id") long id) {
+//        System.out.println("Fetching User with id " + id);
+//        User user = userService.getUserById((int) id);
+//        if (user == null) {
+//            System.out.println("User with id " + id + " not found");
+//            return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
+//        }
+//        return new ResponseEntity<User>(user, HttpStatus.OK);
+//    }
+
 }
