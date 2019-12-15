@@ -173,8 +173,13 @@ public class UserService {
 		userDao.removeAll("User");
 	}
 
-    public Result doLogout(User user, HttpServletRequest request) {
-		request.removeAttribute("user");
+    public Result doLogout(User user) {
+		System.out.println("user "+user.getUserId()+" logout");
+//		request.removeAttribute("user");
+		/*执行登出操作：
+		* 方案1：redis存储登录的用户
+		* 方案2：将前端放入后端项目中，使用session
+		* */
 		return new Result(1);
     }
 }

@@ -47,7 +47,7 @@ public class CheckUserInterceptor extends HandlerInterceptorAdapter {
 			}
 		}
 		System.out.println(claims);
-		request.setAttribute("requestUser",claims);
+//		request.setAttribute("requestUser",claims);
 		return true;
 	}
 
@@ -56,6 +56,7 @@ public class CheckUserInterceptor extends HandlerInterceptorAdapter {
 	 * 前后端完全分离的情况下, session是没有用的, 考虑使用redis吧
 	 * @return
 	 */
+	@Deprecated
 	public boolean checkSession(HttpServletRequest request){
 		return request.getSession().getAttribute("user")!=null;
 	}

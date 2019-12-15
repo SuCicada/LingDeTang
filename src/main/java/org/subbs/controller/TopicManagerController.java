@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
+import org.subbs.dao.Page;
 import org.subbs.entity.Forum;
 import org.subbs.entity.Topic;
 import org.subbs.entity.User;
@@ -68,8 +69,8 @@ public class TopicManagerController extends BaseController {
      * @return
      */
     @RequestMapping(value = {"","/"}, method = RequestMethod.GET)
-    public ResponseEntity listAllForums() {
-        List<Topic> topics = topicService.getAllTopic();
+    public ResponseEntity listTopics(int forumId,int pageNo,int pageSize) {
+        Page topics = topicService.getPagedTopics(forumId,pageNo,pageSize);
         System.out.println(topics);
         Result result = new Result();
         result.setSuccess(1);

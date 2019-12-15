@@ -1,7 +1,6 @@
 package org.subbs.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.subbs.dao.Page;
 import org.subbs.dao.TopicDao;
@@ -30,9 +29,9 @@ public class TopicService {
      * 获取论坛版块某一页主题帖，以最后回复时间降序排列
      * @return
      */
-//    public Page getPagedTopics(int boardId, int pageNo, int pageSize){
-//        return topicDao.getPagedTopics(boardId,pageNo,pageSize);
-//    }
+    public Page getPagedTopics(int forumId, int pageNo, int pageSize){
+        return topicDao.getPagedTopics(forumId,pageNo,pageSize);
+    }
 
     public List<Topic> getAllTopic(){
         return topicDao.loadAll();

@@ -45,10 +45,11 @@
             <bean class="org.subbs.interceptor.CorsInterceptor"/>
         </mvc:interceptor>
         <mvc:interceptor>
-            <mvc:mapping path="/**"/>
+<!--            <mvc:mapping path="/**"/>-->
             <mvc:mapping path="/checkLogin"/>
             <mvc:exclude-mapping path="/doLogin"/>
             <mvc:exclude-mapping path="/register"/>
+            <mvc:exclude-mapping path="/forum/"/>
             <bean class="org.subbs.interceptor.CheckUserInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>

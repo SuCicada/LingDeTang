@@ -23,12 +23,11 @@ import java.util.Map;
  * To change this template use File | Settings | File Templates.
  * Description:
  */
-@CrossOrigin(origins = {
-        "http://sxuldt.gitee.io",
-        "http://localhost"},
-        maxAge = 3600)
+//@CrossOrigin(origins = {
+//        "http://sxuldt.gitee.io",
+//        "http://localhost"},
+//        maxAge = 3600)
 @Controller
-@SessionAttributes("user")
 public class LoginController extends BaseController{
     @Autowired
     private UserService userService;
@@ -51,8 +50,9 @@ public class LoginController extends BaseController{
      */
     @ResponseBody
     @RequestMapping(value="/doLogout",method = RequestMethod.POST)
-    public Result logout(User user,HttpServletRequest request) {
-        return userService.doLogout(user,request);
+    public Result logout(User user) {
+        Result a = userService.doLogout(user);
+        return a;
     }
 
     @ResponseBody

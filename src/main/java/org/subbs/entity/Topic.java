@@ -25,7 +25,7 @@ public class Topic {
     private Timestamp topicCreateDate;
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "topic_id", nullable = false)
     public int getTopicId() {
         return topicId;
