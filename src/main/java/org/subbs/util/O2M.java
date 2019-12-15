@@ -3,8 +3,7 @@ package org.subbs.util;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -17,6 +16,21 @@ import java.util.Map;
 public class O2M {
     public static Map parse(Object object){
         return parse(object, object.getClass().getDeclaredFields());
+    }
+
+    public static Map parseExclude(Object object,String ... name) {
+        Class clazz = object.getClass();
+        List<Field> fields = new ArrayList<>();
+//                Arrays.asList(
+//                object.getClass().getDeclaredFields());
+        Field[] fieldAll = object.getClass().getDeclaredFields();
+        List exclude = Arrays.asList(name);
+        for(int i=0;i<fieldAll.length;i++){
+            if(!exclude.contains(fieldAll[i].getName())){
+                fields.add(fieldAll[i]);
+            }
+        }
+        return parse(object,fields);
     }
 
     public static Map parse(Object object,String ... name){
@@ -33,6 +47,10 @@ public class O2M {
     }
 
     public static Map parse(Object object,Field ... fields){
+        return parse(object,fields);
+    }
+
+    public static Map parse(Object object,List<Field> fields) {
         Map res = new HashMap();
         Class clazz = object.getClass();
         try {

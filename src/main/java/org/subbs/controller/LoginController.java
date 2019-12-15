@@ -51,8 +51,7 @@ public class LoginController extends BaseController{
     @ResponseBody
     @RequestMapping(value="/doLogout",method = RequestMethod.POST)
     public Result logout(User user) {
-        Result a = userService.doLogout(user);
-        return a;
+        return userService.doLogout(user);
     }
 
     @ResponseBody

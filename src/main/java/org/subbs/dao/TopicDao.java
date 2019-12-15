@@ -3,6 +3,7 @@ package org.subbs.dao;
 import org.springframework.stereotype.Repository;
 import org.subbs.entity.Topic;
 import org.subbs.entity.User;
+import org.subbs.util.O2M;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +50,10 @@ public class TopicDao extends BaseDao<Topic>{
         List<Object[]> data = page.getResult();
         for(int i=0;i<data.size();i++){
             User user = (User)(data.get(i))[1];
+            /* 这里是返回给前端的用户信息 */
+            String info[] = new String[]{"userPassword"};
+            Map userInfo = O2M.parseExclude(user,info);
+            (data.get(i))[1] = userInfo;
             user.setUserPassword("");
         }
         return page;
