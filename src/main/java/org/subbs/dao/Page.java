@@ -73,6 +73,10 @@ public class Page implements Serializable {
 		return data;
 	}
 
+	public void setData(List data) {
+		this.data = data;
+	}
+
 	/**
 	 * 取该页当前页码,页码从1开始.
 	 */

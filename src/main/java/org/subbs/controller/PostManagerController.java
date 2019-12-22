@@ -48,13 +48,13 @@ public class PostManagerController extends BaseController {
      * @return
      */
     @RequestMapping(value = {"","/"}, method = RequestMethod.GET)
-    public ResponseEntity listTopics(int forumId,int pageNo,int pageSize) {
-        Page topics = postService.getPagedTopics(forumId,pageNo,pageSize);
-        System.out.println(topics);
+    public ResponseEntity listPosts(int topicId, int pageNo, int pageSize) {
+        Page posts = postService.getPagedTopics(topicId,pageNo,pageSize);
+        System.out.println(posts);
         Result result = new Result();
         result.setSuccess(1);
         Map data = new HashMap();
-        data.put("topics",topics);
+        data.put("posts",posts);
         result.setData(data);
         return new ResponseEntity(result, HttpStatus.OK);
     }

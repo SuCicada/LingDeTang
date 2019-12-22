@@ -13,6 +13,7 @@ import org.subbs.entity.User;
 import org.subbs.util.O2M;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,15 +53,25 @@ public class PostService {
      */
     public Page getPagedTopics(int topicId, int pageNo, int pageSize) {
         Page page = postDao.getPagedTopics(topicId, pageNo, pageSize);
-        List<Object[]> data = page.getResult();
+        List<Object> data = page.getResult();
+        List res = new ArrayList();
+        Topic topic = topicDao.get(topicId);
+        int topicUserId = topic.getUserId();
+        Map topicInfo = new HashMap();
+        topicInfo.put("userId",topicUserId);
         for (int i = 0; i < data.size(); i++) {
-            User user = (User) (data.get(i))[1];
+            Post post = (Post) data.get(i);
+            User user = userDao.get(post.getUserId());
             /* 这里是返回给前端的用户信息 */
             String info[] = new String[]{"userPassword"};
             Map userInfo = O2M.parseExclude(user, info);
-            (data.get(i))[1] = userInfo;
-            user.setUserPassword("");
+            Map map = new HashMap();
+            map.put("post",post);
+            map.put("user",userInfo);
+            map.put("topic",topicInfo);
+            res.add(map);
         }
+        page.setData(res);
         return page;
     }
 

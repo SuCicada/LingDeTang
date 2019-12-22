@@ -38,8 +38,8 @@ public class TopicManagerController extends BaseController {
     @Autowired
     TopicService topicService;
 
-    @RequestMapping(value="/", method = RequestMethod.POST)
-    public ResponseEntity createTopic(Topic topic, String userId,HttpServletRequest request, UriComponentsBuilder ucBuilder){
+    @RequestMapping(value = "/", method = RequestMethod.POST)
+    public ResponseEntity createTopic(Topic topic, String userId, HttpServletRequest request, UriComponentsBuilder ucBuilder) {
 //        int userId = ((Integer) ((Map)request.getAttribute("requestUser")).get("userId"));
         topic.setUserId(Integer.parseInt(userId));
         topic.setTopicViewCount(0);
@@ -57,7 +57,7 @@ public class TopicManagerController extends BaseController {
         Result result = new Result();
         result.setSuccess(1);
         Map data = new HashMap();
-        data.put("topicId",topic.getTopicId());
+        data.put("topicId", topic.getTopicId());
         result.setData(data);
         return new ResponseEntity(result, HttpStatus.OK);
 
@@ -66,16 +66,29 @@ public class TopicManagerController extends BaseController {
 
     /**
      * 分页查询
+     *
      * @return
      */
-    @RequestMapping(value = {"","/"}, method = RequestMethod.GET)
-    public ResponseEntity listTopics(int forumId,int pageNo,int pageSize) {
-        Page topics = topicService.getPagedTopics(forumId,pageNo,pageSize);
+    @RequestMapping(value = {"", "/"}, method = RequestMethod.GET)
+    public ResponseEntity listTopics(int forumId, int pageNo, int pageSize) {
+        Page topics = topicService.getPagedTopics(forumId, pageNo, pageSize);
         System.out.println(topics);
         Result result = new Result();
         result.setSuccess(1);
         Map data = new HashMap();
-        data.put("topics",topics);
+        data.put("topics", topics);
+        result.setData(data);
+        return new ResponseEntity(result, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = {"/search/"}, method = RequestMethod.GET)
+    public ResponseEntity listSearchTopics(int searchForumId, String searchContent, int pageNo, int pageSize) {
+        Page topics = topicService.getSearchPageTopics(searchForumId, searchContent, pageNo, pageSize);
+        System.out.println(topics);
+        Result result = new Result();
+        result.setSuccess(1);
+        Map data = new HashMap();
+        data.put("topics", topics);
         result.setData(data);
         return new ResponseEntity(result, HttpStatus.OK);
     }
@@ -91,4 +104,6 @@ public class TopicManagerController extends BaseController {
         topicService.addViewCount(topicId);
         return result;
     }
+
+
 }

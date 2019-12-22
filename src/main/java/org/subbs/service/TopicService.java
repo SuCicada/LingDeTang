@@ -32,62 +32,75 @@ public class TopicService {
     private UserDao userDao;
 
 
-    public void save(Topic topic){
+    public void save(Topic topic) {
         topicDao.save(topic);
     }
 
     /**
      * 获取论坛版块某一页主题帖，以最后回复时间降序排列
+     *
      * @return
      */
-    public Page getPagedTopics(int forumId, int pageNo, int pageSize){
-        Page page = topicDao.getPagedTopics(forumId,pageNo,pageSize);
+    public Page getPagedTopics(int forumId, int pageNo, int pageSize) {
+        Page page = topicDao.getPagedTopics(forumId, pageNo, pageSize);
+        takePageUserInfo(page);
+        return page;
+    }
+
+    public Page getSearchPageTopics(int searchForumId, String searchContent, int pageNo, int pageSize) {
+        Page page = topicDao.getSearchPageTopics(searchForumId, searchContent, pageNo, pageSize);
+        takePageUserInfo(page);
+        return page;
+    }
+
+    public Page takePageUserInfo(Page page) {
         List<Object[]> data = page.getResult();
-        for(int i=0;i<data.size();i++){
-            User user = (User)(data.get(i))[1];
+        for (int i = 0; i < data.size(); i++) {
+            User user = (User) (data.get(i))[1];
             /* 这里是返回给前端的用户信息 */
             String info[] = new String[]{"userPassword"};
-            Map userInfo = O2M.parseExclude(user,info);
+            Map userInfo = O2M.parseExclude(user, info);
             (data.get(i))[1] = userInfo;
             user.setUserPassword("");
         }
         return page;
     }
 
-    public Long getCount(){
+    public Long getCount() {
         return topicDao.count();
     }
 
-    public List<Topic> getAllTopic(){
+    public List<Topic> getAllTopic() {
         return topicDao.loadAll();
     }
 
-    public Result getTopicById(int topicId){
+    public Result getTopicById(int topicId) {
         Topic topic = topicDao.get(topicId);
         if (topic == null) {
             System.out.println("Topic with id " + topic + " not found");
-            return new Result(0,"Topic not found");
+            return new Result(0, "Topic not found");
         }
         int userId = topic.getUserId();
         User user = userDao.get(userId);
         Map data = new HashMap();
-        data.put("topic",topic);
+        data.put("topic", topic);
         if (user == null) {
             System.out.println("User with id " + user + " not found");
-            return new Result(1,"User not found",data);
+            return new Result(1, "User not found", data);
         }
         String info[] = new String[]{"userPassword"};
-        Map userInfo = O2M.parseExclude(user,info);
-        data.put("user",userInfo);
-        return new Result(1,"",data);
+        Map userInfo = O2M.parseExclude(user, info);
+        data.put("user", userInfo);
+        return new Result(1, "", data);
     }
 
-    public int addViewCount(int topicId){
-        return addViewCount(topicId,1);
+    public int addViewCount(int topicId) {
+        return addViewCount(topicId, 1);
     }
-    public int addViewCount(int topicId,int addNum){
+
+    public int addViewCount(int topicId, int addNum) {
         Topic topic = topicDao.get(topicId);
-        topic.setTopicViewCount(topic.getTopicViewCount()+addNum);
+        topic.setTopicViewCount(topic.getTopicViewCount() + addNum);
         topicDao.update(topic);
         return topic.getTopicViewCount();
     }
