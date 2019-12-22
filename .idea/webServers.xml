@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="a5c9a676-1e39-4fe7-86f4-08a9738b0ad9" name="aliyun" url="http://sucicada.tk">
+        <fileTransfer host="sucicada.tk" port="22" rootFolder="/mnt/TOOL/apache-tomcat-8.5.47/webapps/LingDeTang-1.0" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="e8ca6919-1952-43f8-a61a-2af11802ae6a" name="aliyun root" url="http://sucicada.tk">
+        <fileTransfer host="sucicada.tk" port="22" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

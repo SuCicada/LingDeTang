@@ -2,6 +2,20 @@
 <project version="4">
   <component name="PublishConfigData">
     <serverData>
+      <paths name="aliyun">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/mnt/TOOL/apache-tomcat-8.5.47/webapps/LingDeTang-1.0" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="aliyun root">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
       <paths name="cluster">
         <serverdata>
           <mappings>

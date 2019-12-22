@@ -1,13 +1,8 @@
 package org.subbs.dao;
 
 import org.springframework.stereotype.Repository;
+import org.subbs.entity.Post;
 import org.subbs.entity.Topic;
-import org.subbs.entity.User;
-import org.subbs.util.O2M;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -18,7 +13,7 @@ import java.util.Map;
  * Description:
  */
 @Repository
-public class TopicDao extends BaseDao<Topic>{
+public class PostDao extends BaseDao<Post>{
 
     private static final String GET_PAGED_TOPICS =
 //            "select Topic.topicId as topicId, " +
@@ -31,12 +26,12 @@ public class TopicDao extends BaseDao<Topic>{
 //                    "Topic.topicUpdateDate as topicUpdateDate," +
 //                    "Topic.topicCreateDate as topicCreateDate," +
 //                    "User.userPhoto as userPhoto " +
-                    "from Topic as Topic, User as User " +
-                    "where User.userId = Topic.userId and Topic.forumId = ? " +
-                    "order by Topic.topicUpdateDate desc";
+                    "from Post as Post, User as User " +
+                    "where User.userId = Post.userId and Post.forumId = ? " +
+                    "order by Post.topicUpdateDate desc";
 
     private static final String QUERY_TOPIC_BY_TITILE =
-            "from Topic where topicTitle like ? order by topicUpdateDate desc";
+            "from Post where topicTitle like ? order by topicUpdateDate desc";
 
 
 

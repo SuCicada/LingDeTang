@@ -213,4 +213,10 @@ public class BaseDao<T>{
     public  Session getSession() {
         return hibernateTemplate.getSessionFactory().getCurrentSession();
     }
+
+	public Long count(){
+		String GET_COUNT = "select count(*) from "+entityClass.getName();
+		List<Long> res = (List<Long>)getHibernateTemplate().find(GET_COUNT);
+		return res.get(0);
+	}
 }

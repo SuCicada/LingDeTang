@@ -39,9 +39,9 @@ public class TopicManagerController extends BaseController {
     TopicService topicService;
 
     @RequestMapping(value="/", method = RequestMethod.POST)
-    public ResponseEntity createTopic(Topic topic, HttpServletRequest request, UriComponentsBuilder ucBuilder){
-        int userId = ((Integer) ((Map)request.getAttribute("requestUser")).get("userId"));
-        topic.setUserId(userId);
+    public ResponseEntity createTopic(Topic topic, String userId,HttpServletRequest request, UriComponentsBuilder ucBuilder){
+//        int userId = ((Integer) ((Map)request.getAttribute("requestUser")).get("userId"));
+        topic.setUserId(Integer.parseInt(userId));
         topic.setTopicViewCount(0);
         topic.setTopicPostCount(0);
         Timestamp now = new Timestamp(System.currentTimeMillis());
@@ -65,7 +65,7 @@ public class TopicManagerController extends BaseController {
 
 
     /**
-     * 查找所有
+     * 分页查询
      * @return
      */
     @RequestMapping(value = {"","/"}, method = RequestMethod.GET)
@@ -80,21 +80,15 @@ public class TopicManagerController extends BaseController {
         return new ResponseEntity(result, HttpStatus.OK);
     }
 
-//    /**
-//     * 查找一个
-//     * @param id
-//     * @return
-//     */
-//    @RequestMapping(value = "/{id}", method = RequestMethod.GET,
-//            produces = MediaType.APPLICATION_JSON_VALUE)
-//    public ResponseEntity<User> getTopic(@PathVariable("id") long id) {
-//        System.out.println("Fetching User with id " + id);
-//        User user = userService.getUserById((int) id);
-//        if (user == null) {
-//            System.out.println("User with id " + id + " not found");
-//            return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
-//        }
-//        return new ResponseEntity<User>(user, HttpStatus.OK);
-//    }
-
+    /**
+     * 查找一个
+     */
+    @RequestMapping(value = "/{topicId}", method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public Result getTopic(@PathVariable("topicId") int topicId) {
+        System.out.println("Fetching Topic with id " + topicId);
+        Result result = topicService.getTopicById(topicId);
+        topicService.addViewCount(topicId);
+        return result;
+    }
 }

@@ -22,8 +22,8 @@ import java.util.List;
  * Description:
  * @author peng
  */
-@RequestMapping(value="/user")
-@RestController
+//@RequestMapping(value="/user")
+//@RestController
 public class UserRestController {
     @Autowired
     UserService userService;

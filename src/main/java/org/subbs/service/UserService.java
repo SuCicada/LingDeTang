@@ -77,12 +77,25 @@ public class UserService {
 	 * @param userId
 	 * @return
 	 */
-	public User getUserById(int userId){
-		return userDao.get(userId);
+	public User getUserById(int userId) {
+		return (User)getUserById(userId,true);
+	}
+
+	public Object getUserById(int userId,Boolean includePassword){
+		User user = userDao.get(userId);
+		if(user == null){
+			return null;
+		}
+		if(includePassword == false){
+			String info[] = new String[]{"userPassword"};
+			Map userInfo = O2M.parseExclude(user,info);
+			return userInfo;
+		}else{
+			return user;
+		}
 	}
 	
 
-	
 	/**
 	 * 根据用户名为条件，执行模糊查询操作 
 	 * @param userName 查询用户名

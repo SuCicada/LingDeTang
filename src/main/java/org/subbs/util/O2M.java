@@ -47,7 +47,7 @@ public class O2M {
     }
 
     public static Map parse(Object object,Field ... fields){
-        return parse(object,fields);
+        return parse(object, Arrays.asList(fields) );
     }
 
     public static Map parse(Object object,List<Field> fields) {
