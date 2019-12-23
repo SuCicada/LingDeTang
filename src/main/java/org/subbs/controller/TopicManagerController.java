@@ -81,7 +81,7 @@ public class TopicManagerController extends BaseController {
         return new ResponseEntity(result, HttpStatus.OK);
     }
 
-    @RequestMapping(value = {"/search/"}, method = RequestMethod.GET)
+    @RequestMapping(value = "/search/", method = RequestMethod.GET)
     public ResponseEntity listSearchTopics(int searchForumId, String searchContent, int pageNo, int pageSize) {
         Page topics = topicService.getSearchPageTopics(searchForumId, searchContent, pageNo, pageSize);
         System.out.println(topics);

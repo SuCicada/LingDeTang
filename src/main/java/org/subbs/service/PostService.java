@@ -37,12 +37,16 @@ public class PostService {
     @Autowired
     private TopicDao topicDao;
 
+    @Autowired
+    private TopicService topicService;
+
     public void save(Post post) {
         Timestamp now = new Timestamp(System.currentTimeMillis());
         post.setPostCreateDate(now);
         post.setPostHeart(0);
         post.setPostIndex(topicDao.get(post.getTopicId())
                 .getTopicPostCount() + 2);
+        topicService.addPostCount(post.getTopicId());
         postDao.save(post);
     }
 

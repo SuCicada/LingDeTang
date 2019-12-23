@@ -61,7 +61,6 @@ public class TopicService {
             String info[] = new String[]{"userPassword"};
             Map userInfo = O2M.parseExclude(user, info);
             (data.get(i))[1] = userInfo;
-            user.setUserPassword("");
         }
         return page;
     }
@@ -103,5 +102,14 @@ public class TopicService {
         topic.setTopicViewCount(topic.getTopicViewCount() + addNum);
         topicDao.update(topic);
         return topic.getTopicViewCount();
+    }
+    public int addPostCount(int topicId) {
+        return addPostCount(topicId,1);
+    }
+    public int addPostCount(int topicId, int addNum){
+        Topic topic = topicDao.get(topicId);
+        topic.setTopicPostCount(topic.getTopicPostCount() + addNum);
+        topicDao.update(topic);
+        return topic.getTopicPostCount();
     }
 }

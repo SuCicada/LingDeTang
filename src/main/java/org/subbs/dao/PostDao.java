@@ -18,7 +18,7 @@ public class PostDao extends BaseDao<Post>{
     private static final String GET_PAGED_TOPICS =
                     "from Post as Post " +
                     "where Post.topicId = ? " +
-                    "order by Post.postIndex desc";
+                    "order by Post.postIndex";
 
     private static final String QUERY_TOPIC_BY_TITILE =
             "from Post where topicTitle like ? order by topicUpdateDate desc";

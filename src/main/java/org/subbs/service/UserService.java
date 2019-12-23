@@ -9,6 +9,7 @@ import org.subbs.entity.User;
 import org.subbs.exception.UserExistException;
 import org.subbs.util.JavaWebTokenManager;
 import org.subbs.util.O2M;
+import org.subbs.util.UploadUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -48,6 +49,10 @@ public class UserService {
 			if(user.getUserSex() == null){
 				user.setUserSex(0);
 			}
+
+			byte[] img = UploadUtil.getFileBytes("userPhoto.jpg");
+			user.setUserPhoto(img);
+            user.setUserNickname(username);
 			//		    user.setCredit(100);
 //            user.setUserType(1);
             userDao.save(user);
