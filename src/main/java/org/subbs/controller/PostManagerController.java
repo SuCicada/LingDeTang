@@ -30,7 +30,7 @@ public class PostManagerController extends BaseController {
     PostService postService;
 
     @RequestMapping(value="/", method = RequestMethod.POST)
-    public ResponseEntity createTopic(Post post, int userId){
+    public ResponseEntity createPost(Post post, int userId){
         post.setUserId(userId);
         postService.save(post);
 

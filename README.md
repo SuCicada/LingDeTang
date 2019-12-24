@@ -44,7 +44,7 @@
     - [Java设置Access-Control-Allow-Origin允许多域名访问的实现方法](https://www.jb51.net/article/148573.htm)
     - [springMVC中多个自定义拦截器方法的执行顺序](https://blog.csdn.net/weixin_39214481/article/details/80030609)
     - [springMVC拦截器返回错误信息给前端](https://blog.csdn.net/qq_37585236/article/details/81781563)
-    
+
 ## server configuration
 
 # 特色
