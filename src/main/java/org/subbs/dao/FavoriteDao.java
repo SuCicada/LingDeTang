@@ -4,6 +4,8 @@ import org.springframework.stereotype.Repository;
 import org.subbs.entity.Favorite;
 import org.subbs.entity.Forum;
 
+import java.util.ArrayList;
+
 /**
  * Created with IntelliJ IDEA.
  * User: peng
@@ -13,11 +15,12 @@ import org.subbs.entity.Forum;
  * Description:
  */
 @Repository
-public class FavoriteDao extends BaseDao<Favorite>{
+public class FavoriteDao extends BaseDao<Favorite> {
     private static final String QUERY_FAVORITE_BY_USER_AND_TOPIC =
             "from Favorite where userId = ? and topicId = ? ";
 
-    public Favorite getFavoriteByUserIdAndTopicId(int userId,int topicId){
-        return (Favorite)getHibernateTemplate().find(QUERY_FAVORITE_BY_USER_AND_TOPIC,userId,topicId);
+    public ArrayList<Favorite> getFavoriteByUserIdAndTopicId(int userId, int topicId) {
+        Object res = getHibernateTemplate().find(QUERY_FAVORITE_BY_USER_AND_TOPIC, userId, topicId);
+        return res != null ? (ArrayList<Favorite>)res : null;
     }
 }
