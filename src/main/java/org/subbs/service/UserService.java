@@ -1,6 +1,8 @@
 package org.subbs.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.subbs.controller.Result;
@@ -60,11 +62,23 @@ public class UserService {
 	}
 	
 	/**
-     * 更新用户
+     * 更新用户基本信息，不包括头像和密码
+	 * 或者说user 里有什么 就更新什么
      * @param user 
      */
-    public void update(User user){
+    public Result updateInfo(User user){
+    	int userId = user.getUserId();
+		User currentUser = getUserById((int) userId);
+
+		if (currentUser==null) {
+			System.out.println("User with id " + userId + " not found");
+//			return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
+			return new Result(0,"user not found");
+		}
+
+
         userDao.update(user);
+		return new Result(1);
     }
 	
 	   /**
@@ -145,8 +159,9 @@ public class UserService {
 			Map data = new HashMap();
 //            Map userInfo = new HashMap();
 			data.put("sessionID",sessionId);
-			String info[] = new String[]{"userId","username","userPhoto"};
-			Map userInfo = O2M.parse(dbUser,info);
+//			String info[] = new String[]{"userId","username","userPhoto"};
+			String info[] = new String[]{"password"};
+			Map userInfo = O2M.parseExclude(dbUser,info);
 			data.put("userInfo", userInfo );
 
 			res.setData(data);

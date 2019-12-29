@@ -35,7 +35,7 @@ public class UserManagerController extends BaseController {
 
     @RequestMapping(value = "/{userId}", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public Result getPost(@PathVariable("userId")int userId) {
+    public Result getUser(@PathVariable("userId")int userId) {
         System.out.println("Fetching User with id " + userId);
         Map userInfo = (Map)userService.getUserById(userId,false);
         Result result = new Result(1,"");
@@ -46,18 +46,13 @@ public class UserManagerController extends BaseController {
         }
     }
 
-    @RequestMapping(value = "/{userId}", method = RequestMethod.PUT)
-    public ResponseEntity<User> updateUser(@PathVariable("userId") int userId, @RequestBody User user) {
-        System.out.println("Updating User " + userId);
-
-        User currentUser = userService.getUserById((int) userId);
-
-        if (currentUser==null) {
-            System.out.println("User with id " + userId + " not found");
-            return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
+    @RequestMapping(value = "/put/{userId}", method = RequestMethod.POST)
+    public ResponseEntity<User> updateUser(User user,String userSignature,@PathVariable("userId") int USERID) {
+        System.out.println("Updating User " + USERID);
+        if(user.getUserId()!=USERID){
+            user.setUserId(USERID);
         }
-
-        userService.update(currentUser);
-        return new ResponseEntity<User>(currentUser, HttpStatus.OK);
+        userService.updateInfo(user);
+        return new ResponseEntity<User>(user, HttpStatus.OK);
     }
 }

@@ -97,7 +97,7 @@ public class UserRestController {
 //        currentUser.setUsername(user.getUsername());
 //        currentUser.setSalary(user.getSalary());
 
-        userService.update(currentUser);
+//        userService.update(currentUser);
         return new ResponseEntity<User>(currentUser, HttpStatus.OK);
     }
 
