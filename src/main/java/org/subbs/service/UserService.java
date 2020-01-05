@@ -9,6 +9,7 @@ import org.subbs.controller.Result;
 import org.subbs.dao.UserDao;
 import org.subbs.entity.User;
 import org.subbs.exception.UserExistException;
+import org.subbs.util.EntityUtil;
 import org.subbs.util.JavaWebTokenManager;
 import org.subbs.util.O2M;
 import org.subbs.util.UploadUtil;
@@ -68,7 +69,7 @@ public class UserService {
      */
     public Result updateInfo(User user){
     	int userId = user.getUserId();
-		User currentUser = getUserById((int) userId);
+		Object currentUser = getUserById((int) userId,true);
 
 		if (currentUser==null) {
 			System.out.println("User with id " + userId + " not found");
@@ -76,9 +77,12 @@ public class UserService {
 			return new Result(0,"user not found");
 		}
 
+		User newUser = (User)EntityUtil.UpdateEntity(currentUser,user);
+        userDao.update(newUser);
+		Map res = new HashMap();
 
-        userDao.update(user);
-		return new Result(1);
+		res.put("user",O2M.parseExclude(newUser,"userPassword"));
+		return new Result(1,"",res);
     }
 	
 	   /**
@@ -96,8 +100,8 @@ public class UserService {
 	 * @param userId
 	 * @return
 	 */
-	public User getUserById(int userId) {
-		return (User)getUserById(userId,true);
+	public Object getUserById(int userId) {
+		return getUserById(userId,false);
 	}
 
 	public Object getUserById(int userId,Boolean includePassword){

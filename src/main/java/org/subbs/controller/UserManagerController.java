@@ -5,10 +5,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.subbs.entity.Forum;
 import org.subbs.entity.User;
 import org.subbs.service.UserService;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,24 +37,44 @@ public class UserManagerController extends BaseController {
 
     @RequestMapping(value = "/{userId}", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public Result getUser(@PathVariable("userId")int userId) {
+    public Result getUser(@PathVariable("userId") int userId) {
         System.out.println("Fetching User with id " + userId);
-        Map userInfo = (Map)userService.getUserById(userId,false);
-        Result result = new Result(1,"");
-        if(userInfo == null){
-            return new Result(0,"not found user");
-        }else{
-            return new Result(1,"",userInfo);
+        Object userInfo = userService.getUserById(userId, false);
+        Map data = new HashMap();
+        data.put("user",userInfo);
+        if (userInfo == null) {
+            return new Result(0, "not found user");
+        } else {
+            return new Result(1, "", data);
         }
     }
 
-    @RequestMapping(value = "/put/{userId}", method = RequestMethod.POST)
-    public ResponseEntity<User> updateUser(User user,String userSignature,@PathVariable("userId") int USERID) {
+
+    @RequestMapping(value = "/put/{userId}",
+            method = RequestMethod.POST)
+    public Result updateUser(User user,
+                             @PathVariable("userId") int USERID){
         System.out.println("Updating User " + USERID);
-        if(user.getUserId()!=USERID){
+        if (user.getUserId() != USERID) {
             user.setUserId(USERID);
         }
-        userService.updateInfo(user);
-        return new ResponseEntity<User>(user, HttpStatus.OK);
+        return userService.updateInfo(user);
     }
+
+    @RequestMapping(value = "/put/photo/{userId}",
+            method = RequestMethod.POST)
+    public Result updateUserPhoto(User user,
+                             @PathVariable("userId") int USERID,
+                             @RequestParam("file")MultipartFile userPhotoFile
+    ) throws IOException {
+        System.out.println("Updating User " + USERID);
+        if (user.getUserId() != USERID) {
+            user.setUserId(USERID);
+        }
+        if(userPhotoFile != null){
+            user.setUserPhoto(userPhotoFile.getBytes());
+        }
+        return userService.updateInfo(user);
+    }
+
 }

@@ -42,22 +42,22 @@ public class UserRestController {
         return new ResponseEntity<List<User>>(users, HttpStatus.OK);
     }
 
-    /**
-     * 查找一个用户
-     * @param id
-     * @return
-     */
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET,
-            produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<User> getUser(@PathVariable("id") long id) {
-        System.out.println("Fetching User with id " + id);
-        User user = userService.getUserById((int) id);
-        if (user == null) {
-            System.out.println("User with id " + id + " not found");
-            return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<User>(user, HttpStatus.OK);
-    }
+//    /**
+//     * 查找一个用户
+//     * @param id
+//     * @return
+//     */
+//    @RequestMapping(value = "/{id}", method = RequestMethod.GET,
+//            produces = MediaType.APPLICATION_JSON_VALUE)
+//    public ResponseEntity<User> getUser(@PathVariable("id") long id) {
+//        System.out.println("Fetching User with id " + id);
+//        Object user = userService.getUserById((int) id);
+//        if (user == null) {
+//            System.out.println("User with id " + id + " not found");
+//            return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
+//        }
+//        return new ResponseEntity<User>(user, HttpStatus.OK);
+//    }
 
     /**
      * 添加用户
@@ -86,7 +86,7 @@ public class UserRestController {
     public ResponseEntity<User> updateUser(@PathVariable("id") long id, @RequestBody User user) {
         System.out.println("Updating User " + id);
 
-        User currentUser = userService.getUserById((int) id);
+        User currentUser = (User) userService.getUserById((int) id);
 
         if (currentUser==null) {
             System.out.println("User with id " + id + " not found");
@@ -105,7 +105,7 @@ public class UserRestController {
     public ResponseEntity<User> deleteUser(@PathVariable("id") long id) {
         System.out.println("Fetching & Deleting User with id " + id);
 
-        User user = userService.getUserById((int) id);
+        User user = (User) userService.getUserById((int) id);
         if (user == null) {
             System.out.println("Unable to delete. User with id " + id + " not found");
             return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
