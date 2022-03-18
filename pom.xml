@@ -248,7 +248,7 @@
         <commons-dbcp.version>1.4</commons-dbcp.version>
         <jetty.version>9.3.22.v20171030</jetty.version>
         <aspectjweaver.version>1.6.8</aspectjweaver.version>
-        <hibernate.version>4.2.0.Final</hibernate.version>
+        <hibernate.version>5.4.24.Final</hibernate.version>
         <mockito.version>1.10.19</mockito.version>
         <unitils.version>3.4.2</unitils.version>
         <selenium.version>2.41.0</selenium.version>
